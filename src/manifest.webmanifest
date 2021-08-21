@@ -1,0 +1,28 @@
+{
+  "short_name": "KeepTrack",
+  "name": "KeepTrack",
+  "description": "3D Satellite Toolkit",
+  "icons": [
+    {
+      "src": "./img/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./img/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./img/logo128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#172635",
+  "display": "fullscreen",
+  "scope": "/",
+  "theme_color": "#172635"
+}

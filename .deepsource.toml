@@ -1,0 +1,16 @@
+version = 1
+
+test_patterns = ["*.test.js"]
+
+exclude_patterns = [
+  "src/js/lib/external/*",
+  "*mSat.js*",
+  "*/offline/*",
+  ]
+
+[[analyzers]]
+name = "javascript"
+enabled = true
+
+  [analyzers.meta]
+  environment = ["jquery"]
