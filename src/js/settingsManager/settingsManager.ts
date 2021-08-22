@@ -108,6 +108,7 @@ export const settingsManager: any = {
         case 'www.thkruz.github.io':
           settingsManager.installDirectory = '/keeptrack.space/';
           break;
+        case 'itamardavidyan.github.io':
         case 'www.itamardavidyan.github.io':
           settingsManager.installDirectory = '/Debris-AR/';
           break;
