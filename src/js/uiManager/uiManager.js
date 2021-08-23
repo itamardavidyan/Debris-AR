@@ -1532,7 +1532,13 @@ uiManager.onReady = () => {
     });
 
     $('#toggle-background-color-button').on('click', function () {
-      return;
+      const canvasHolderElement = document.querySelector("#canvas-holder");
+      const currentBackgroundColor = canvasHolderElement.style.backgroundColor;
+      if (currentBackgroundColor === 'black') {
+        canvasHolderElement.style.backgroundColor = 'white';
+      } else {
+        canvasHolderElement.style.backgroundColor = 'black';
+      }
     });
 
 
