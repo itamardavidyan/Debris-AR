@@ -88,8 +88,8 @@ drawManager.glInit = async () => {
   // drawManager Scope
   if (typeof process !== 'undefined') {
     gl = drawManager.canvas.getContext('webgl', {
-      alpha: false,
-      premultipliedAlpha: false,
+      alpha: true,
+      premultipliedAlpha: true,
       desynchronized: true, // Desynchronized Fixed Jitter on Old Computer
       antialias: true,
       powerPreference: 'high-performance',
@@ -98,8 +98,8 @@ drawManager.glInit = async () => {
     });
   } else {
     gl = drawManager.canvas.getContext('webgl2', {
-      alpha: false,
-      premultipliedAlpha: false,
+      alpha: true,
+      premultipliedAlpha: true,
       desynchronized: true, // Desynchronized Fixed Jitter on Old Computer
       antialias: true,
       powerPreference: 'high-performance',
