@@ -39,7 +39,7 @@ var drawManager = {
   },
 };
 
-let groupsManager, uiInput, starManager, satellite, ColorScheme, cameraManager, objectManager, orbitManager, sensorManager, uiManager, lineManager, dotsManager;
+let groupsManager, uiInput, starManager, satellite, ColorScheme, cameraManager, objectManager, orbitManager, sensorManager, uiManager, dotsManager;
 drawManager.init = () => {
   uiInput = keepTrackApi.programs.uiInput;
   starManager = keepTrackApi.programs.starManager;
@@ -50,7 +50,6 @@ drawManager.init = () => {
   orbitManager = keepTrackApi.programs.orbitManager;
   sensorManager = keepTrackApi.programs.sensorManager;
   uiManager = keepTrackApi.programs.uiManager;
-  lineManager = keepTrackApi.programs.lineManager;
   dotsManager = keepTrackApi.programs.dotsManager;
   groupsManager = keepTrackApi.programs.groupsManager;
 
@@ -266,8 +265,6 @@ drawManager.drawLoop = (preciseDt) => {
 
   orbitManager.draw(drawManager.pMatrix, cameraManager.camMatrix, postProcessingManager.curBuffer);
 
-  lineManager.draw();
-
   if (objectManager.selectedSat !== -1 && settingsManager.enableConstantSelectedSatRedraw) {
     orbitManager.clearSelectOrbit();
     orbitManager.setSelectOrbit(objectManager.selectedSat);
@@ -435,17 +432,11 @@ drawManager.satCalculate = () => {
     selectSatManager.selectSat(objectManager.selectedSat, cameraManager);
     if (objectManager.selectedSat !== -1) {
       orbitManager.setSelectOrbit(objectManager.selectedSat);
-      if (objectManager.isSensorManagerLoaded && sensorManager.currentSensor.lat != null) {
-        lineManager.drawWhenSelected();
-        lineManager.updateLineToSat(objectManager.selectedSat, satSet.getIdFromSensorName(sensorManager.currentSensor.name));
-      }
+     
       // TODO: #281 keepTrackApi.programs.mapManager.updateMap should be a callback
       if (keepTrackApi.programs.mapManager) {
         keepTrackApi.programs.mapManager.updateMap();
       }
-    }
-    if (objectManager.selectedSat == -1) {
-      lineManager.drawWhenSelected();
     }
     drawManager.lastSelectedSat = objectManager.selectedSat;
     objectManager.lastSelectedSat(objectManager.selectedSat);
