@@ -885,7 +885,7 @@ drawManager.clearFrameBuffers = () => {
   // NOTE: clearColor is set here because two different colors are used. If you set it during
   // frameBuffer init then the wrong color will be applied (this can break gpuPicking)
   gl.bindFramebuffer(gl.FRAMEBUFFER, dotsManager.pickingFrameBuffer);
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  gl.clearColor(1.0, 1.0, 1.0, 1.0);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   // Clear all post processing frame buffers
   /* istanbul ignore next */
