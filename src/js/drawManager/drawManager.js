@@ -608,7 +608,9 @@ drawManager.updateHover = () => {
     }
 
     if (settingsManager.enableHoverOrbits) {
-      if (uiInput.mouseSat !== -1 && keepTrackApi.programs.satSet.satData[uiInput.mouseSat].type !== 'Star') {
+      if (uiInput.mouseSat !== -1 && 
+          !!keepTrackApi.programs.satSet.satData[uiInput.mouseSat] &&
+          keepTrackApi.programs.satSet.satData[uiInput.mouseSat].type !== 'Star') {
         orbitManager.setHoverOrbit(uiInput.mouseSat);
       } else {
         orbitManager.clearHoverOrbit();
