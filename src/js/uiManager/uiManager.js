@@ -1541,6 +1541,8 @@ uiManager.onReady = () => {
       } else {
         canvasHolderElement.style.backgroundColor = 'black';
       }
+
+      uiManager.doSearch('');
     });
 
 
