@@ -209,6 +209,7 @@ ul {
     right: 0;
     bottom: 0;
     overflow: hidden;
+    background-color: black;
 }
 
 #load-cover {
