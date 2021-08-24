@@ -1141,7 +1141,7 @@ satSet.getSatPosOnly = (i) => {
   if (!satData) return null;
   if (!satData[i]) return null;
 
-  if (gotExtraData) {
+  if (gotExtraData && !!dotManager.positionData) {
     satData[i].position = {
       x: dotManager.positionData[i * 3],
       y: dotManager.positionData[i * 3 + 1],
@@ -1402,19 +1402,19 @@ satSet.exportTle2Txt = () => {
 satSet.setHover = (i) => {
   objectManager.setHoveringSat(i);
   if (i === objectManager.lasthoveringSat) return;
-  if (i !== -1 && satData[i].type == 'Star') return;
+  if (i !== -1 && !!satData[i] && satData[i].type == 'Star') return;
 
   settingsManager.currentColorScheme.hoverSat = objectManager.hoveringSat;
 
   gl.bindBuffer(gl.ARRAY_BUFFER, settingsManager.currentColorScheme.colorBuffer);
-  // If Old Select Sat Picked Color it Correct Color
-  if (objectManager.lasthoveringSat !== -1 && objectManager.lasthoveringSat !== objectManager.selectedSat) {
-    gl.bufferSubData(gl.ARRAY_BUFFER, objectManager.lasthoveringSat * 4 * 4, new Float32Array(settingsManager.currentColorScheme.colorRuleSet(satSet.getSat(objectManager.lasthoveringSat)).color));
-  }
-  // If New Select Sat Picked Color it
-  if (objectManager.hoveringSat !== -1 && objectManager.hoveringSat !== objectManager.selectedSat) {
-    gl.bufferSubData(gl.ARRAY_BUFFER, objectManager.hoveringSat * 4 * 4, new Float32Array(settingsManager.hoverColor));
-  }
+  // // If Old Select Sat Picked Color it Correct Color
+  // if (objectManager.lasthoveringSat !== -1 && objectManager.lasthoveringSat !== objectManager.selectedSat) {
+  //   gl.bufferSubData(gl.ARRAY_BUFFER, objectManager.lasthoveringSat * 4 * 4, new Float32Array(settingsManager.currentColorScheme.colorRuleSet(satSet.getSat(objectManager.lasthoveringSat)).color));
+  // }
+  // // If New Select Sat Picked Color it
+  // if (objectManager.hoveringSat !== -1 && objectManager.hoveringSat !== objectManager.selectedSat) {
+  //   gl.bufferSubData(gl.ARRAY_BUFFER, objectManager.hoveringSat * 4 * 4, new Float32Array(settingsManager.hoverColor));
+  // }
   objectManager.setLasthoveringSat(objectManager.hoveringSat);
 
   // satSet.setColorScheme(settingsManager.currentColorScheme, true);
@@ -1436,15 +1436,15 @@ satSet.selectSat = (i) => {
   if (settingsManager.isMobileModeEnabled) uiManager.searchToggle(false);
 
   settingsManager.currentColorScheme.selectSat = objectManager.selectedSat;
-  gl.bindBuffer(gl.ARRAY_BUFFER, settingsManager.currentColorScheme.colorBuffer);
-  // If Old Select Sat Picked Color it Correct Color
-  if (objectManager.lastSelectedSat() !== -1) {
-    gl.bufferSubData(gl.ARRAY_BUFFER, objectManager.lastSelectedSat() * 4 * 4, new Float32Array(settingsManager.currentColorScheme.colorRuleSet(satSet.getSat(objectManager.lastSelectedSat())).color));
-  }
-  // If New Select Sat Picked Color it
-  if (i !== -1) {
-    gl.bufferSubData(gl.ARRAY_BUFFER, i * 4 * 4, new Float32Array(settingsManager.selectedColor));
-  }
+  // gl.bindBuffer(gl.ARRAY_BUFFER, settingsManager.currentColorScheme.colorBuffer);
+  // // If Old Select Sat Picked Color it Correct Color
+  // if (objectManager.lastSelectedSat() !== -1) {
+  //   gl.bufferSubData(gl.ARRAY_BUFFER, objectManager.lastSelectedSat() * 4 * 4, new Float32Array(settingsManager.currentColorScheme.colorRuleSet(satSet.getSat(objectManager.lastSelectedSat())).color));
+  // }
+  // // If New Select Sat Picked Color it
+  // if (i !== -1) {
+  //   gl.bufferSubData(gl.ARRAY_BUFFER, i * 4 * 4, new Float32Array(settingsManager.selectedColor));
+  // }
 
   objectManager.setSelectedSat(i);
 

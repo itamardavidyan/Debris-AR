@@ -404,7 +404,7 @@ drawManager.satCalculate = () => {
     // Can't Draw a Star
     if (typeof drawManager.sat === 'undefined') return;
 
-    if (!drawManager.sat.static) {
+    if (!!drawManager.sat && !drawManager.sat.static) {
       cameraManager.camSnapToSat(drawManager.sat);
 
       // if (drawManager.sat.missile || typeof meshManager == 'undefined') {
@@ -415,7 +415,7 @@ drawManager.satCalculate = () => {
 
       // if (!settingsManager.modelsOnSatelliteViewOverride && cameraManager.cameraType.current !== cameraManager.cameraType.satellite) {
     }
-    if (drawManager.sat.missile) orbitManager.setSelectOrbit(drawManager.sat.satId);
+    if (!!drawManager.sat && drawManager.sat.missile) orbitManager.setSelectOrbit(drawManager.sat.satId);
   } else {
     // Reset the selected satellite if no satellite is selected
     drawManager.sat = { id: -1 };

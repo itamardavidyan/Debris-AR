@@ -434,7 +434,7 @@ var _updateSelectBox = () => {
   const sat = satSet.getSat(objectManager.selectedSat);
 
   // Don't bring up the update box for static dots
-  if (typeof sat === 'undefined' || sat.static) return;
+  if (!sat || sat.static) return;
 
   if (timeManager.now * 1 > settingsManager.lastBoxUpdateTime * 1 + updateInterval) {
     keepTrackApi.methods.updateSelectBox(sat);
@@ -740,7 +740,9 @@ uiManager.updateURL = () => {
   if (settingsManager.trusatMode) {
     paramSlices.push('trusat');
   }
-  if (objectManager.selectedSat !== -1 && typeof satSet.getSatExtraOnly(objectManager.selectedSat).SCC_NUM != 'undefined') {
+  if (objectManager.selectedSat !== -1 &&
+    !!satSet.getSatExtraOnly(objectManager.selectedSat) && 
+     typeof satSet.getSatExtraOnly(objectManager.selectedSat).SCC_NUM != 'undefined') {
     paramSlices.push('sat=' + satSet.getSatExtraOnly(objectManager.selectedSat).SCC_NUM);
   }
   var currentSearch = searchBox.getCurrentSearch();

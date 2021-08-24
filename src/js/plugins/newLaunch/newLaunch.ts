@@ -229,8 +229,10 @@ export const init = (): void => {
             isNewLaunchMenuOpen = true;
 
             let sat = keepTrackApi.programs.satSet.getSatExtraOnly(keepTrackApi.programs.objectManager.selectedSat);
-            $('#nl-scc').val(sat.SCC_NUM);
-            $('#nl-inc').val((sat.inclination * RAD2DEG).toPrecision(2));
+            if (sat) {
+              $('#nl-scc').val(sat.SCC_NUM);
+              $('#nl-inc').val((sat.inclination * RAD2DEG).toPrecision(2));
+            }
           } else {
             aM.adviceList.newLaunchDisabled();
             keepTrackApi.programs.uiManager.toast(`Select a Satellite First!`, 'caution');

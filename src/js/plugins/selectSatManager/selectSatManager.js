@@ -20,12 +20,6 @@ const selectSatManager = {
     if (satId !== -1) {
       // Get the satellite object
       sat = satSet.getSat(satId);
-      // Selecting a star does nothing
-      if (sat.type == 'Star') return;
-      // Selecting a non-missile non-sensor object does nothing
-      if ((sat.active == false || typeof sat.active == 'undefined') && typeof sat.staticNum == 'undefined') return;
-      // stop rotation if it is on
-      cameraManager.rotateEarth(false);
     }
 
     cameraManager.camSnapMode = false;
@@ -71,7 +65,7 @@ const selectSatManager = {
         }
       }
     } else if (satId !== -1) {
-      if (cameraManager.cameraType.current == cameraManager.cameraType.default) {
+      if (!!sat && cameraManager.cameraType.current == cameraManager.cameraType.default) {
         cameraManager.ecLastZoom = cameraManager.zoomLevel;
         if (!sat.static) {
           cameraManager.cameraType.set(cameraManager.cameraType.fixedToSat);

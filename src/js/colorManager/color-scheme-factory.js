@@ -31,6 +31,7 @@ class ColorSchemeFactory {
     ColorSchemeFactory.resetObjectTypeFlags();
 
     ColorSchemeFactory.default = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       if (sat.static && sat.type === 'Star') {
         if (sat.vmag >= 4.7 && ColorSchemeFactory.objectTypeFlags.starLow) {
           return {
@@ -268,6 +269,7 @@ class ColorSchemeFactory {
     });
     ColorSchemeFactory.default.default = true;
     ColorSchemeFactory.onlyFOV = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       if (sat.inView) {
         return {
           color: ColorSchemeFactory.colorTheme.inview,
@@ -281,6 +283,7 @@ class ColorSchemeFactory {
       }
     });
     ColorSchemeFactory.sunlight = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       if (sat.static && (sat.type === 'Launch Facility' || sat.type === 'Control Facility') && ColorSchemeFactory.objectTypeFlags.facility === false) {
         return {
           color: ColorSchemeFactory.colorTheme.deselected,
@@ -433,6 +436,7 @@ class ColorSchemeFactory {
     // NOTE: ColorSchemeFactory.apogee doesn't appear to be used
     // ///////////////////////////////
     ColorSchemeFactory.apogee = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       var ap = sat.apogee;
       ColorSchemeFactory.colorTheme.gradientAmt = Math.min(ap / 45000, 1.0);
       ColorSchemeFactory.colorTheme.apogeeGradient = [1.0 - ColorSchemeFactory.colorTheme.gradientAmt, ColorSchemeFactory.colorTheme.gradientAmt, 0.0, 1.0];
@@ -443,6 +447,7 @@ class ColorSchemeFactory {
     });
     // ///////////////////////////////
     ColorSchemeFactory.smallsats = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       if (sat.OT === 1 && ColorSchemeFactory.objectTypeFlags.satSmall === false) {
         return {
           color: ColorSchemeFactory.colorTheme.deselected,
@@ -462,6 +467,7 @@ class ColorSchemeFactory {
       }
     });
     ColorSchemeFactory.rcs = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       var rcs = sat.R;
       if (rcs < 0.1 && ColorSchemeFactory.objectTypeFlags.rcsSmall === false) {
         return {
@@ -512,6 +518,7 @@ class ColorSchemeFactory {
       };
     });
     ColorSchemeFactory.countries = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       var country = sat.C;
       if ((country === 'US' && ColorSchemeFactory.objectTypeFlags.countryUS === false) || (cameraManager.cameraType.current === cameraManager.cameraType.planetarium && country === 'US' && ColorSchemeFactory.objectTypeFlags.countryUS === false)) {
         return {
@@ -562,6 +569,7 @@ class ColorSchemeFactory {
       };
     });
     ColorSchemeFactory.ageOfElset = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       // Objects beyond sensor coverage are hidden
       if (sat.static && sat.type === 'Star') {
         if (sat.vmag >= 4.7 && ColorSchemeFactory.objectTypeFlags.starLow) {
@@ -649,6 +657,7 @@ class ColorSchemeFactory {
       };
     });
     ColorSchemeFactory.lostobjects = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       // Objects beyond sensor coverage are hidden
       if (sat.static && sat.type === 'Star') {
         if (sat.vmag >= 4.7 && ColorSchemeFactory.objectTypeFlags.starLow) {
@@ -718,6 +727,7 @@ class ColorSchemeFactory {
       }
     });
     ColorSchemeFactory.leo = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       if (sat.static && sat.type === 'Star') {
         if (sat.vmag >= 4.7 && ColorSchemeFactory.objectTypeFlags.starLow) {
           return {
@@ -776,6 +786,7 @@ class ColorSchemeFactory {
       }
     });
     ColorSchemeFactory.geo = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       if (sat.static && sat.type === 'Star') {
         if (sat.vmag >= 4.7 && ColorSchemeFactory.objectTypeFlags.starLow) {
           return {
@@ -834,6 +845,7 @@ class ColorSchemeFactory {
       }
     });
     ColorSchemeFactory.velocity = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       // Stars
       if (sat.static && sat.type === 'Star') {
         if (sat.vmag >= 4.7 && ColorSchemeFactory.objectTypeFlags.starLow) {
@@ -915,6 +927,7 @@ class ColorSchemeFactory {
     ColorSchemeFactory.velocity.isVelocityColorScheme = true;
     // Used When Displaying a Group/Search of Objects
     ColorSchemeFactory.group = new ColorScheme(gl, satSet, objectManager, function (sat) {
+      if (!sat) return;
       // Glitch in the Matrix
       // if (groupsManager.selectedGroup === null) return;
       // Show Things in the Group

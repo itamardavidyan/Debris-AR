@@ -1931,9 +1931,11 @@ satellite.createManeuverAnalyst = (satId, incVariation, meanmoVariation, rascVar
 
   var iTLE2 = '2 ' + 80000 + ' ' + inc + ' ' + iTLE2.substr(17, 35) + meanmo + iTLE2.substr(63);
   sat = satSet.getSat(satId);
-  sat.TLE1 = iTLE1;
-  sat.TLE2 = iTLE2;
-  sat.active = true;
+  if (sat) {
+    sat.TLE1 = iTLE1;
+    sat.TLE2 = iTLE2;
+    sat.active = true;
+  }
   if (satellite.altitudeCheck(iTLE1, iTLE2, timeManager.propOffset) > 1) {
     satCruncher.postMessage({
       typ: 'satEdit',

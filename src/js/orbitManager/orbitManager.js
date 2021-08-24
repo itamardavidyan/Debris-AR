@@ -125,7 +125,7 @@ orbitManager.init = function () {
 
 orbitManager.updateOrbitBuffer = function (satId, force, TLE1, TLE2, missile, latList, lonList, altList) {
   const sat = satSet.getSat(satId);
-  if (typeof sat === 'undefined') return;
+  if (!sat) return;
 
   if (force) {
     orbitWorker.postMessage({
@@ -262,7 +262,8 @@ orbitManager.draw = function (pMatrix, camMatrix, tgtBuffer) {
   gl.uniformMatrix4fv(pathShader.uCamMatrix, false, camMatrix);
   gl.uniformMatrix4fv(pathShader.uPMatrix, false, pMatrix);
 
-  if (currentSelectId !== -1 && !satSet.getSatExtraOnly(currentSelectId).static) {
+  var externalSat = satSet.getSatExtraOnly(currentSelectId);
+  if (currentSelectId !== -1 && !!externalSat && !externalSat.static) {
     gl.uniform4fv(pathShader.uColor, settingsManager.orbitSelectColor);
     gl.bindBuffer(gl.ARRAY_BUFFER, glBuffers[currentSelectId]);
     gl.vertexAttribPointer(pathShader.aPos, 4, gl.FLOAT, false, 0, 0);
@@ -270,7 +271,7 @@ orbitManager.draw = function (pMatrix, camMatrix, tgtBuffer) {
     gl.drawArrays(gl.LINE_STRIP, 0, NUM_SEGS + 1);
   }
 
-  if (currentHoverId !== -1 && currentHoverId !== currentSelectId && !satSet.getSatExtraOnly(currentHoverId).static) {
+  if (currentHoverId !== -1 && currentHoverId !== currentSelectId && !!externalSat && !externalSat.static) {
     // avoid z-fighting
     gl.uniform4fv(pathShader.uColor, settingsManager.orbitHoverColor);
     gl.bindBuffer(gl.ARRAY_BUFFER, glBuffers[currentHoverId]);
