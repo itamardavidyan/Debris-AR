@@ -69,9 +69,9 @@ export const init = (): void => {
         cbName: 'stfInfoTopLinks',
         cb: () => {
           if (!stfInfoLinks) {
-            $('#sat-info-top-links').append(keepTrackApi.html`
-              <div id="stf-on-object-link" class="link sat-infobox-links">Build Short Term Fence on this object...</div>
-            `);
+            // $('#sat-info-top-links').append(keepTrackApi.html`
+            //   <div id="stf-on-object-link" class="link sat-infobox-links">Build Short Term Fence on this object...</div>
+            // `);
             $('#stf-on-object-link').on('click', function () {
               $('#stf-az').val(satellite.currentTEARR.az.toFixed(1));
               $('#stf-el').val(satellite.currentTEARR.el.toFixed(1));

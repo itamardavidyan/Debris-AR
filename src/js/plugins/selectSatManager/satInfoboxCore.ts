@@ -167,9 +167,6 @@ const satInfoboxCore = {
           <div id="sat-infobox" class="text-select">
             <div id="sat-info-top-links">
               <div id="sat-info-title" class="center-text">This is a title</div>
-              <div id="all-objects-link" class="link sat-infobox-links sat-only-info">Find all objects from this launch...</div>
-              <div id="near-orbits-link" class="link sat-infobox-links sat-only-info">Find all objects near this orbit...</div>
-              <div id="near-objects-link" class="link sat-infobox-links">Find all objects near this object...</div>              
             </div>
             <li class="divider"></li>
             <div class="sat-info-row sat-only-info">
