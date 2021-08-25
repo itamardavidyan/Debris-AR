@@ -939,6 +939,25 @@ uiManager.onReady = () => {
     }
   })();
 
+  var firebaseConfig = {
+    apiKey: "AIzaSyBmRNSP-rxNRyyFt2ygsnSXxApoiVBYT2Y",
+    authDomain: "debrisar.firebaseapp.com",
+    projectId: "debrisar",
+    storageBucket: "debrisar.appspot.com",
+    messagingSenderId: "213046397986",
+    appId: "1:213046397986:web:0423a4977e03dc5540ce7b"
+  };
+  // Initialize Firebase
+  var firebase = globalThis.firebase;
+  firebase.initializeApp(firebaseConfig);
+
+  const db = firebase.firestore();
+  db.collection('debris').get().then((history) => {
+    const data = history.docs.map((doc) => Object.assign(doc.data(), { id: doc.id }));
+    // console.table(data);
+    keepTrackApi.firebase = data;
+  })
+
   // Load Bottom icons
   if (!settingsManager.disableUI) {
     $.event.special.touchstart = {

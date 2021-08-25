@@ -140,6 +140,24 @@ const selectSatManager = {
         }
       }
 
+      const satData = keepTrackApi.firebase.find(({ id }) => id === String(satId));
+      if (satData) {
+        const { note, claim } = satData;
+
+        $('#sat-note').val(note || '');
+
+        if (!claim) {
+          $('#sat-claim').html('<input type="text" name="claim" id="sat-claim-input" "placeholder="Claim Name">');
+        } else {
+          $('#sat-claim').html(`<span class="claim">${claim}</span>`);
+        }
+      } else {
+        $('#sat-claim').html('<input type="text" name="claim" id="sat-claim-input" "placeholder="Claim Name">');
+        $('#sat-note').val('');
+      }
+      $('#sat-id').val(satId);
+      $('#firebase-form-submit-button').show();
+
       $('#sat-infobox').fadeIn();
 
       if (objectManager.isSensorManagerLoaded && sensorManager.currentSensor.lat != null) {

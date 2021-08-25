@@ -1,4 +1,5 @@
 interface keepTrackApiInterface {
+  firebase: any[];
   html: (strings: TemplateStringsArray, ...placeholders: any[]) => string;
   register: (params: { method: string; cbName: string; cb: any }) => void;
   unregister: (params: { method: string; cbName: string }) => void;
@@ -136,6 +137,7 @@ const keepTrackApi: keepTrackApiInterface = {
     uiManager: {},
     uiInput: {},    
   },
+  firebase: []
 };
 
 (<any>window).keepTrackApi = keepTrackApi;

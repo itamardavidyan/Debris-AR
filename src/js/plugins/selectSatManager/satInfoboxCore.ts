@@ -556,8 +556,59 @@ const satInfoboxCore = {
             NO DATA
           </div>
         </div>
+        <form id="firebase-form">
+          <div class="sat-info-row sat-only-info" style="height: 70px">
+            <div class="sat-info-key" data-position="left" data-delay="50">
+              Note
+            </div>
+            <div class="sat-info-value" style="height: 70px">
+              <textarea name="note" id="sat-note" placeholder="Write your note here" style="height: 70px"></textarea>
+            </div>
+          </div>
+          <div class="sat-info-row sat-only-info">
+            <div class="sat-info-key" data-position="left" data-delay="50">
+              Claim
+            </div>
+            <div class="sat-info-value" id="sat-claim">
+              <input type="text" name="claim" id="sat-claim-input" "placeholder="Claim Name">
+            </div>
+            <input type="hidden" id="sat-id"></input>
+
+          </div>
+
+          <input type="submit" value="Save" id="firebase-form-submit-button"></input>
+        </form>
         `);
         satInfoboxCore.satMissionData.isLoaded = true;
+
+        $('#firebase-form').on('submit', function (e) {
+          e.preventDefault();
+          var note = $('#sat-note').val();
+          var claim = $('#sat-claim-input').val();
+          var satId = $('#sat-id').val();
+          
+          var firebase = (globalThis as any).firebase;
+          var db = firebase.firestore();
+
+          const data: any = {};
+          if (note) data['note'] = note;
+          if (claim) data['claim'] = claim;
+
+          var currentDebris = keepTrackApi.firebase.find(({ id }) => id === satId)
+          if (currentDebris) {
+            db.collection("debris").doc(String(satId)).update(data);
+            Object.assign(currentDebris, data)
+          } else {
+            db.collection("debris").doc(String(satId)).set(data);
+            keepTrackApi.firebase.push({ id: satId, claim, note })
+          }
+
+
+          $('#firebase-form-submit-button').hide();
+          if (claim) {
+            $('#sat-claim').html(`<span class="claim">${claim}</span>`);
+          }
+        });
       }
 
       if (!sat.missile) {
