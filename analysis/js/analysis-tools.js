@@ -18760,6 +18760,7 @@ var keepTrackApi = {
         uiManager: {},
         uiInput: {},
     },
+    firebase: []
 };
 window.keepTrackApi = keepTrackApi;
 
