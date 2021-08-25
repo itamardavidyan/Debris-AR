@@ -687,3 +687,17 @@
 }
 
 /* MEDIA @ 320px */
+
+#close-button {
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
+  border-radius: 999px;
+  background-color: white;
+  color: red;
+  text-align: center;
+  position: relative;
+  left: -10px;
+  line-height: 17px;
+  font-size: 15px;
+}

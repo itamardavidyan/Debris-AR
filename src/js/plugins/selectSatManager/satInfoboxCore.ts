@@ -165,6 +165,7 @@ const satInfoboxCore = {
       if (!satInfoboxCore.orbitalData.isLoaded) {
         $('#ui-wrapper').append(keepTrackApi.html`
           <div id="sat-infobox" class="text-select">
+            <div id="close-button">x</div>
             <div id="sat-info-top-links">
               <div id="sat-info-title" class="center-text">This is a title</div>
             </div>
@@ -274,6 +275,10 @@ const satInfoboxCore = {
             $('#sat-infobox').removeClass().removeAttr('style');
             return;
           }
+        });
+
+        $('#close-button').on('click', () => {
+          $('#sat-infobox').fadeOut();
         });
 
         satInfoboxCore.orbitalData.isLoaded = true;
